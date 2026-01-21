@@ -30,6 +30,12 @@ import { cn } from "@/lib/utils";
    const [property, setProperty] = useState<Property | null>(null);
    const [loading, setLoading] = useState(true);
    const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleBack = () => {
+    // If the user landed directly on this URL, there may be no SPA history to go back to.
+    if (window.history.length > 1) navigate(-1);
+    else navigate("/");
+  };
  
    useEffect(() => {
      if (id) {
@@ -142,7 +148,7 @@ import { cn } from "@/lib/utils";
 
           <div className="absolute left-4 right-4 top-4 flex items-center justify-between">
             <Button
-              onClick={() => navigate(-1)}
+              onClick={handleBack}
               variant="pill"
               size="icon"
               className="pointer-events-auto"
